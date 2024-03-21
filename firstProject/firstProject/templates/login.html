@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+
+<form action="" method="post">
+    {% csrf_token %}
+    {% comment %} {{login}} {% endcomment %}
+    <table>
+    {% for i in login  %}
+    <tr>
+        <td>{{i.label}}</td>
+        <td>{{i}}</td>    
+    </tr>
+            
+    {% endfor %}
+</table>
+<input type="submit" value="login">
+
+
+</form>
+
+
+
+{% endblock  %}

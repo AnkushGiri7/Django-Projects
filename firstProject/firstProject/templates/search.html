@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block title %}Search{% endblock%}
+{% block content %}
+    <h1>Search Results</h1>
+    {% for obj in product %}
+      
+    {% include "card.html" with product=obj %}
+
+    {% endfor %}
+{% endblock %}

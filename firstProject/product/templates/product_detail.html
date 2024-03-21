@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ProductDetail</title>
+
+    {% include "links.html" %}
+</head>
+<body>
+    {% include "navbar.html" %}
+    <h1>Product Detail</h1>
+    <ul>
+        <li>{{p.product_name}}</li>
+        <li>{{p.product_description}}</li>
+        <div><img src='{{p.product_image.url}}' alt='' height='100px' width="200px"/> </div>
+    </ul>
+</body>
+</html>

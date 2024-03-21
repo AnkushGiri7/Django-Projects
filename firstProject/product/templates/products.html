@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    {% include "links.html" %}
+</head>
+<body>
+    {% include "navbar.html" %}
+    {% comment %} <h1 ><a href="{% url 'homepage'%}">Product List</a></h1> {% endcomment %}
+    <h1>{{request.session.currentUser}}</h1>
+    {% for product in object_list  %}
+    <ul>
+        <li><a href="{% url 'productDetail' product.id %}">{{product.product_name}}</a></li>
+        <li>{{product.product_description}}</li>
+        <div><img src='{{product.product_image.url}}' alt='' height='100px' width="200px"/> </div>
+    </ul>
+    
+    
+    {% endfor %}
+</body>
+</html>

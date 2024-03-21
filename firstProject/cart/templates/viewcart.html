@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+{% load customFilter %}
+{% block content %}
+
+  <div class="d-flex  flex-column justify-content-center align-items-center">
+    {% if request.user.is_authenticated and items == 0 %}
+        <div class="container d-flex justify-content-center flex-column">
+          <h1 class="text-center">Your Cart is Empty</h1><br>
+          <h3 class="text-center">Add Product to Cart</h3>
+          <button class="btn btn-info"><a href="{% url 'product_lookup'%}" style="all:unset">Shop Now</a></button>
+        </div>
+      {% endif %}
+    {% if created and items != 0 %} 
+      <h2>Add To Cart</h2>
+      {% for item in items  %}
+
+          {%include "kard.html" with product=item.product%}
+          
+          {% comment %} <h1>quantity = {{item.quantity}}</h1> {% endcomment %}
+            <div class="d-flex justify-content-center">
+              <div>
+                <form action="{% url 'updatecartitem' cart_item_id=item.id%}" method="">
+                  <button class="btn btn-secondary" type="submit">Update</button>
+                  <button type="button"class="btn btn-secondary rounded" onclick=updateQuantity('{{item.id}}',-1)>-</button>
+                  <input type="number" maxlength="2" size="3" class="p-1 rounded" name="quantity" id="quantity-{{item.id}}" value={{item.quantity}} min="0">
+                  <button type="button"class="btn btn-secondary rounded" onclick=updateQuantity('{{item.id}}',1)>+</button>
+                </form>
+              </div>
+              <div>
+                <button class="btn btn-danger" type="submit"><a href="{% url 'deletecartitem' cart_item_id=item.id%}" style="all: unset;">Delete</a></button>
+              </div>
+            </div>
+          </div>
+          <script>
+              function updateQuantity(productId,operation){
+                let quantity = document.getElementById('quantity-'+productId)
+                let currentQuantity = parseInt(quantity.value)
+                let newQuantity = currentQuantity+operation
+                quantity.value = newQuantity
+              }
+            </script>
+      {% endfor %}
+      <div class="container">
+      <table border="2px" cellspacing="20px" cellpadding="15px">
+        <tr>
+          <th>Product Id</th>
+          <th>Product Name</th>
+          <th>Quantity</th>
+          <th>Price</th>
+          <th>Amount</th>
+        </tr>
+        {% for item in items %}
+        <tr>
+          <td>{{item.product.id}}</td>
+          <td>{{item.product.product_name}}</td>
+          <td>{{item.quantity}}</td>
+          <td>{{item.product.product_price}}</td>
+          <td>{{item.product.product_price|multiply:item.quantity}}</td>
+        </tr>
+        {% endfor %}
+      </table>
+      <div class="d-flex justify-content-center mx-5">
+        <p class="text-center"> Total Amount : {{finalAmount}}</p>
+        <button class="btn btn-info"><a href="{% url 'checkout'%}" style="all: unset;">CheckOut</a></button>
+      </div>
+    </div>
+  {% endif %}
+{% endblock content %}

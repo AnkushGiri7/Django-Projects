@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Lookup</title>
+    {% include "links.html" %}
+</head>
+<body>
+    {% include "navbar.html" %}
+        {% for p in product %}
+            {% comment %} <p style="border:2px solid black;text-align:center;">{{forloop.counter}}</p> {% endcomment %}
+            {% comment %} <p style="border:2px solid black;text-align:center;">{{forloop.counter0}}</p> {% endcomment %}
+            {% comment %}to start counter from zero use 0 after counter{% endcomment %} 
+            {% comment %} <p style="border:2px solid black;text-align:center;">{{forloop.revcounter}}</p>  {% endcomment %}
+            {% comment %}for reverse counter use rev before counnter{% endcomment %} 
+            {% comment %} <p style="border:2px solid black;text-align:center;">{{forloop.revcounter0}}</p>  {% endcomment %}
+            {% comment %}to start reverse counter which end at zero use rev before counter and zero after counter{% endcomment %} 
+            {% comment %} <p style="border:2px solid black;text-align:center;">{{forloop.first}}</p>  {% endcomment %}
+            {% comment %}if we use first then it will return true for first item in list and return false for other {% endcomment %} 
+            {% comment %} <p style="border:2px solid black;text-align:center;">{{forloop.last}}</p>  {% endcomment %}
+            {% comment %}if we use last then it will return true for last item in list and return false for other {% endcomment %} 
+            {% comment %} {% include "card.html" with product=p  decision=forloop.first%} {% endcomment %}
+            {% comment %} {% include "card.html" with product=p  dicision=forloop.last%} {% endcomment %}
+            {% include "card.html" with product=p %}
+        {% endfor %}
+    {% comment %} {% include "footer.html" %} {% endcomment %}
+</body>
+</html>
